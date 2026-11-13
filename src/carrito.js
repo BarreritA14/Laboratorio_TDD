@@ -1,9 +1,15 @@
 // Laboratorio TDD: carrito de compras
 // Escribe aquí el código SOLO después de tener una prueba en rojo.
 
+const CUPONES = {
+  DESC10: 0.10,
+  DESC20: 0.20,
+};
+
 export class Carrito {
   constructor() {
     this.productos = [];
+    this.cupon = null;
   }
 
   agregar(nombre, precio, cantidad = 1) {
@@ -39,5 +45,17 @@ export class Carrito {
 
   subtotal() {
     return this.productos.reduce((suma, p) => suma + p.precio * p.cantidad, 0);
+  }
+
+  aplicarCupon(codigo) {
+    if (!(codigo in CUPONES)) {
+      throw new Error(`El cupón "${codigo}" no es válido`);
+    }
+    this.cupon = codigo;
+  }
+
+  descuento() {
+    if (!this.cupon) return 0;
+    return Math.round(this.subtotal() * CUPONES[this.cupon]);
   }
 }
