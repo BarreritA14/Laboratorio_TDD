@@ -7,7 +7,13 @@ export class Carrito {
   }
 
   agregar(nombre, precio, cantidad = 1) {
-    this.productos.push({ nombre, precio, cantidad });
+    const existente = this.productos.find((p) => p.nombre === nombre);
+
+    if (existente) {
+      existente.cantidad += cantidad;
+    } else {
+      this.productos.push({ nombre, precio, cantidad });
+    }
   }
 
   cantidadDeItems() {
