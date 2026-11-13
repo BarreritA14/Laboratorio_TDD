@@ -60,13 +60,16 @@ export class Carrito {
     if (!this.cupon) return 0;
     return Math.round(this.subtotal() * CUPONES[this.cupon]);
   }
-    iva() {
-    return Math.round((this.subtotal() - this.descuento()) * IVA);
+
+  baseGravable() {
+    return this.subtotal() - this.descuento();
+  }
+
+  iva() {
+    return Math.round(this.baseGravable() * IVA);
   }
 
   total() {
-    return this.subtotal() - this.descuento() + this.iva();
+    return this.baseGravable() + this.iva();
   }
-
- 
 }
