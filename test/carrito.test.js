@@ -10,4 +10,13 @@ describe('Carrito de compras', () => {
   });
 
   // Escribe aquí tus pruebas, una iteración a la vez.
+    describe('Iteración 1: carrito vacío', () => {
+    test('un carrito nuevo no tiene ítems', () => {
+      assert.equal(carrito.cantidadDeItems(), 0);
+    });
+
+    test('un carrito nuevo tiene subtotal 0', () => {
+      assert.equal(carrito.subtotal(), 0);
+    });
+  });
 });
