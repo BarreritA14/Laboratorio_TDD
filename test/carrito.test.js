@@ -100,4 +100,24 @@ describe('Carrito de compras', () => {
       assert.throws(() => carrito.aplicarCupon('GRATIS'), /no es válido/);
     });
   });
+    describe('Iteración 7: IVA y total a pagar', () => {
+    test('el IVA es el 19 % del subtotal cuando no hay cupón', () => {
+      carrito.agregar('Mouse', 50000, 2);
+
+      assert.equal(carrito.iva(), 19000);
+      assert.equal(carrito.total(), 119000);
+    });
+
+    test('el IVA se calcula sobre el valor con descuento', () => {
+      carrito.agregar('Mouse', 50000, 2);
+      carrito.aplicarCupon('DESC10');
+
+      assert.equal(carrito.iva(), 17100);
+      assert.equal(carrito.total(), 107100);
+    });
+
+    test('un carrito vacío tiene total 0', () => {
+      assert.equal(carrito.total(), 0);
+    });
+  });
 });
